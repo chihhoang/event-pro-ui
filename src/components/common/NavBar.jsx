@@ -6,7 +6,7 @@ const NavBar = ({ user }) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <Link className="navbar-brand" to="/">
-        Storage Manager
+        Event Pro
       </Link>
       <button
         className="navbar-toggler"
