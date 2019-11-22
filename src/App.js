@@ -11,6 +11,8 @@ import Logout from "./components/Logout";
 import AssetForm from "./components/AssetForm";
 import "./App.css";
 import Profile from "./components/Profile";
+import ListEvents from "./components/ListEvents";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 class App extends Component {
   state = {};
@@ -39,6 +41,7 @@ class App extends Component {
             <Route path="/assets" component={Assets}></Route>
             <Route path="/logout" component={Logout}></Route>
             <Route path="/not-found" component={NotFound}></Route>
+            <Route path="/list" component={ListEvents}></Route>
             <Route path="/" component={Home}></Route>
             <Redirect from="/" exact to="/movies"></Redirect>
             <Redirect to="/not-found"></Redirect>
