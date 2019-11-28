@@ -27,3 +27,11 @@ export function me(token) {
 
   return HttpService.get(endPoint + "/users/me", config);
 }
+
+export function env() {
+  const config = {
+    headers: {}
+  };
+
+  return HttpService.get(endPoint + "/env", config);
+}
