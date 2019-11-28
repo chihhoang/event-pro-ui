@@ -4,14 +4,14 @@ import jwtDecode from "jwt-decode";
 import NotFound from "./components/NotFound";
 import NavBar from "./components/common/NavBar";
 import Home from "./components/Home";
-import Assets from "./components/Assets";
+import Admin from "./components/Admin";
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
 import Logout from "./components/Logout";
-import AssetForm from "./components/AssetForm";
-import "./App.css";
+import EventForm from "./components/EventForm";
 import Profile from "./components/Profile";
 import ListEvents from "./components/ListEvents";
+import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 class App extends Component {
@@ -21,6 +21,9 @@ class App extends Component {
     try {
       const token = localStorage.getItem("idToken");
       const user = jwtDecode(token);
+
+      const env = localStorage.getItem("env");
+      user.env = env;
 
       this.setState({ user });
     } catch (ex) {}
@@ -37,8 +40,8 @@ class App extends Component {
             <Route path="/register" component={RegisterForm}></Route>
             <Route path="/login" component={LoginForm}></Route>
             <Route path="/profile" component={Profile}></Route>
-            <Route path="/assets/new" component={AssetForm}></Route>
-            <Route path="/assets" component={Assets}></Route>
+            <Route path="/events/new" component={EventForm}></Route>
+            <Route path="/admin" component={Admin}></Route>
             <Route path="/logout" component={Logout}></Route>
             <Route path="/not-found" component={NotFound}></Route>
             <Route path="/list" component={ListEvents}></Route>
