@@ -23,6 +23,9 @@ class LoginForm extends Form {
     const { username, password } = this.state.data;
 
     try {
+      const res = await AuthService.env();
+      localStorage.setItem("env", res.data);
+
       const { data: response } = await AuthService.authenticate(
         username,
         password
@@ -30,7 +33,7 @@ class LoginForm extends Form {
 
       localStorage.setItem("idToken", response.idToken);
 
-      window.location = "/assets";
+      window.location = "/list";
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         alert("Invalid username and password");

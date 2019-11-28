@@ -1,26 +1,19 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
 
-// Stateless Funtional Component
+// Stateless Functional Component
 const NavBar = ({ user }) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <Link className="navbar-brand" to="/">
         Event Pro
       </Link>
-      <button
-        className="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
+
+      <div
+        className="collapse navbar-collapse w-100 order-3 dual-collapse2"
+        id="navbarNavAltMarkup"
       >
-        <span className="navbar-toggler-icon"></span>
-      </button>
-      <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div className="navbar-nav">
+        <div className="navbar-nav ml-auto">
           {!user && (
             <React.Fragment>
               <NavLink className="nav-item nav-link" to="/login">
@@ -33,14 +26,21 @@ const NavBar = ({ user }) => {
           )}
           {user && (
             <React.Fragment>
-              <NavLink className="nav-item nav-link" to="/assets">
-                Assets
+              <NavLink className="nav-item nav-link" to="/list">
+                Events
               </NavLink>
               <NavLink className="nav-item nav-link" to="/profile">
                 {user.sub}
               </NavLink>
               <NavLink className="nav-item nav-link" to="/logout">
                 Logout
+              </NavLink>
+            </React.Fragment>
+          )}
+          {user && user.auth.includes("ROLE_ADMIN") && (
+            <React.Fragment>
+              <NavLink className="nav-item nav-link" to="/admin">
+                Admin Control <span style={{ color: "black" }}>{user.env}</span>
               </NavLink>
             </React.Fragment>
           )}

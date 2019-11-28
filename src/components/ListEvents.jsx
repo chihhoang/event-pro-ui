@@ -24,11 +24,6 @@ export default class ListEvents extends Component {
     return (
       <div>
         <Container>
-          <Nav variant="pills" defaultActiveKey="/">
-            <Nav.Item>
-              <Nav.Link href="/">Home</Nav.Link>
-            </Nav.Item>
-          </Nav>
           <br />
           <h2>List Of Events</h2>
           <br />
@@ -42,7 +37,7 @@ export default class ListEvents extends Component {
             </thead>
             <tbody>
               {this.state.EventData.map(EventData => (
-                <tr>
+                <tr key={EventData.id}>
                   <td>
                     {new Date(EventData.startTime).toLocaleString("en-US")} -
                     {new Date(EventData.endTime).toLocaleString("en-US")}
