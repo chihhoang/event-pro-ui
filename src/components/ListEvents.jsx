@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Table from "react-bootstrap/Table";
 import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
 import HttpService from "../services/HttpService";
 import { endPoint } from "../config.json";
 import EventDescriptionPage from "../components/EventDescriptionPage";
