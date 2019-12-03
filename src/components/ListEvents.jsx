@@ -49,6 +49,7 @@ export default class ListEvents extends Component {
                       ticketsAvailable={EventData.availableTickets}
                       ticketPrice={EventData.ticketPrice}
                       eventId={EventData.id}
+                      eventRecord={EventData}
                     />
                   </td>
                   <td>{EventData.location} </td>
