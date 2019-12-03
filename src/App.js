@@ -11,6 +11,7 @@ import Logout from "./components/Logout";
 import EventForm from "./components/EventForm";
 import Profile from "./components/Profile";
 import ListEvents from "./components/ListEvents";
+import Cart from "./components/Cart";
 import { Provider } from 'react-redux';
 import store from "./redux/store";
 import "./App.css";
@@ -48,6 +49,7 @@ class App extends Component {
             <Route path="/logout" component={Logout}></Route>
             <Route path="/not-found" component={NotFound}></Route>
             <Route path="/list" component={ListEvents}></Route>
+            <Route path="/cart" component={Cart}></Route>
             <Route path="/" component={Home}></Route>
             <Redirect from="/" exact to="/movies"></Redirect>
             <Redirect to="/not-found"></Redirect>
