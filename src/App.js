@@ -11,6 +11,8 @@ import Logout from "./components/Logout";
 import EventForm from "./components/EventForm";
 import Profile from "./components/Profile";
 import ListEvents from "./components/ListEvents";
+import { Provider } from 'react-redux';
+import store from "./redux/store";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -33,6 +35,7 @@ class App extends Component {
     console.log("app render");
 
     return (
+      <Provider store={store}>
       <React.Fragment>
         <NavBar user={this.state.user} />
         <main className="container">
@@ -51,6 +54,7 @@ class App extends Component {
           </Switch>
         </main>
       </React.Fragment>
+      </Provider>
     );
   }
 }
