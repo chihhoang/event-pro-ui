@@ -8,6 +8,9 @@ const NavBar = ({ user }) => {
       <Link className="navbar-brand" to="/">
         Event Pro
       </Link>
+      <Link className="navbar-brand" to="/cart">
+            Shopping Cart
+      </Link>
 
       <div
         className="collapse navbar-collapse w-100 order-3 dual-collapse2"

@@ -5,8 +5,22 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import HttpService from "../services/HttpService";
 import { endPoint } from "../config.json";
+import {addToCart} from "../redux/cartActions";
+import { connect } from 'react-redux'
 
-export default class EventDescriptionPage extends Component {
+const mapStateToProps = state => {
+  return {
+    events: state.events
+  }
+}
+
+const  mapDispatchToProps = dispatch => {
+  return {
+    addToCart: (event) => dispatch(addToCart(event))
+  }
+}
+
+class EventDescriptionPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -45,6 +59,13 @@ export default class EventDescriptionPage extends Component {
   };
 
   render() {
+    let  onAddToCart = () => {
+      console.log("Add to cart Called")
+      let event =  {...this.props.eventRecord}
+      event.numTickets = parseInt(this.state.numberOfTickets, 10)
+      this.props.addToCart(event)
+      Close()
+    }
     let Close = () => {
       if (this.state.token != null) {
         this.createOrder();
@@ -91,7 +112,7 @@ export default class EventDescriptionPage extends Component {
               name="numberOfTickets"
               onChange={this.onChangedesc}
             />
-            <Button variant="primary" onClick={Close}>
+            <Button variant="primary" onClick={onAddToCart}>
               Add To Cart
             </Button>
           </Modal.Footer>
@@ -100,3 +121,5 @@ export default class EventDescriptionPage extends Component {
     );
   }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(EventDescriptionPage)

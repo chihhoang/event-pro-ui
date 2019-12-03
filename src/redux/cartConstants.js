@@ -1,0 +1,6 @@
+export const  ADD_TO_CART = 'ADD_TO_CART'
+export const  REMOVE_EVENT_FROM_CART = 'REMOVE_EVENT_FROM_CART'
+export const  REDUCE_NUM_TICKETS = 'REDUCE_NUM_TICKETS'
+export const  ADD_NUM_TICKETS = 'ADD_NUM_TICKETS'
+export const  CHECKOUT_DONE = 'CHECKOUT_DONE'
+export const  LOGOUT = 'LOGOUT'
