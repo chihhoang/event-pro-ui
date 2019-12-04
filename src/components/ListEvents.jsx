@@ -43,7 +43,7 @@ export default class ListEvents extends Component {
                   </td>
                   <td>
                     <EventDescriptionPage
-                      name={EventData.eventName}
+                      name={EventData.description}
                       imageUrl={EventData.imageUrl}
                       description={EventData.description}
                       ticketsAvailable={EventData.availableTickets}
