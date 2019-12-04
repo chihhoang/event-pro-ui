@@ -3,6 +3,7 @@ import { post } from "axios";
 import { endPoint } from "../config.json";
 import { Form, Input, Button, DatePicker } from 'antd';
 import 'antd/dist/antd.css';
+import HttpService from "../services/HttpService";
 
 const { RangePicker } = DatePicker;
 
@@ -14,25 +15,6 @@ class Event extends Component {
     totalTickets: 200,
     ticketPrice: 9.99
   };
-
-  // onFormSubmit = e => {
-  //   e.preventDefault();
-
-  //   this.fileUpload(this.state.file).then(response => {
-  //     console.log(response);
-  //   });
-  // };
-
-  // onChange = e => {
-  //   this.setState({ file: e.target.files[0] });
-  // };
-
-  // onTextChange = ({ currentTarget: input }) => {
-  //   const state = { ...this.state };
-
-  //   state[input.name] = input.value; // passed from name element in input
-  //   this.setState({ state });
-  // };
 
   handleSubmit = e => {
     e.preventDefault();
@@ -47,12 +29,13 @@ class Event extends Component {
       console.log("rangeVal", rangeValue)
       const values = {
         ...fieldsValue,
-        'startTime': rangeValue[0].format('YYYY-MM-DD HH:mm'),
-        'endTime': rangeValue[1].format('YYYY-MM-DD HH:mm')
+        'startTime': rangeValue[0],
+        'endTime': rangeValue[1]
       };
+      console.log(typeof values.startTime);
       console.log('Received values of form: ', values);
       const token = localStorage.getItem("idToken");
-
+      console.log('token ', token);
       const config = {
         headers: {
           Authorization: "Bearer " + token,
@@ -60,14 +43,21 @@ class Event extends Component {
         }
       };
   
-  
-      return post(url, values, config).then(
-        res => {
-          window.location = "/events";
-        },
-        error => {
-          alert("File Upload Failed");
-        }
+      let data = new FormData();
+      data.append('file', this.state.file);
+      data.append('eventName', values.eventName);
+      data.append('description', values.description);
+      data.append('totalTickets', values.totalTickets);
+      data.append('ticketPrice', values.ticketPrice);
+      data.append('startTime', values.startTime);
+      data.append('endTime', values.endTime);
+      HttpService.post(endPoint + "/events", data, config).then(res => {
+        console.log("res", res);
+        alert("Hurray! Event is created");
+      },
+      error => {
+        alert("Sorry! Event is not created");
+      }
       );
       
     });
@@ -108,51 +98,28 @@ class Event extends Component {
   //   );
   // }
 
+  changeFile(e) {
+    this.setState({
+      file: e.target.files[0]
+    })
+  }
+
   render() {
     const { getFieldDecorator } = this.props.form;
     const rangeConfig = {
       rules: [{ type: 'array', required: true, message: 'Please select time!' }],
     };
     return (
-      // <form onSubmit={this.onFormSubmit}>
-      //   <h1>File Upload</h1>
-      //   <input type="file" onChange={this.onChange} />
-
-      //   <input
-      //     ref={ref => {
-      //       this.description = ref;
-      //     }}
-      //     onChange={this.onTextChange}
-      //     name="description"
-      //     id="description"
-      //     type="text"
-      //     placeholder="Enter description"
-      //     className="form-control"
-      //   />
-      //   <input
-      //     ref={ref => {
-      //       this.eventName = ref;
-      //     }}
-      //     onChange={this.onTextChange}
-      //     name="eventNamen"
-      //     id="eventName"
-      //     type="text"
-      //     placeholder="Enter Event Name"
-      //     className="form-control"
-      //   />
-      //   <button type="submit">Upload</button>
-      // </form>
-
             <Form className="booking-form" onSubmit={this.handleSubmit}>
               <Form.Item label="Event image">
-                {getFieldDecorator('file', {
+                {getFieldDecorator('inputFile', {
                 rules: [
                   {
                     required: true,
                     message: 'Please upload a file!',
                   },
                 ],
-                })(<Input type="file"/>)}
+                })(<Input type="file" onChange={this.changeFile.bind(this)}/>)}
               </Form.Item>
 
               <Form.Item label="Event Name">
@@ -184,7 +151,7 @@ class Event extends Component {
                     message: 'Please enter total tickets',
                   },
                 ],
-                })(<Input type="text"/>)}
+                })(<Input type="number"/>)}
               </Form.Item>
               <Form.Item label="Ticket price">
                 {getFieldDecorator('ticketPrice', {
@@ -194,7 +161,7 @@ class Event extends Component {
                     message: 'Please enter price',
                   },
                 ],
-                })(<Input type="text"/>)}
+                })(<Input type="number"/>)}
               </Form.Item>
               <Form.Item label="Select Events Dates" >
                 {getFieldDecorator('range-picker', rangeConfig)(<RangePicker  showTime={{ format: 'HH:mm' }} />)}
