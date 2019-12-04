@@ -34,3 +34,14 @@ export function deleteEvent(id) {
 
   return HttpService.delete(endPoint + "/events/" + id, config);
 }
+
+export function getPurchaseHistory() {
+  const token = localStorage.getItem("idToken");
+  const config = {
+    headers: {
+      Authorization: "Bearer " + token
+    }
+  };
+
+  return HttpService.get(endPoint + "/Order/history", config);
+}
