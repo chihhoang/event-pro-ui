@@ -5,11 +5,10 @@ import MaterialIcon, {colorPalette} from 'material-icons-react';
 import Button from '@material-ui/core/Button';
 import {Redirect} from "react-router-dom";
 import store from "../redux/store";
+import * as CheckoutService from "../services/CheckoutService";
+import * as EventService from "../services/EventService";
 
 class Cart extends Component{
-    state = {
-        checkoutComplete: false,
-    };
 
     removeEventFromCart = (event)=>{
         this.props.removeEventFromCart(event);
@@ -23,16 +22,42 @@ class Cart extends Component{
         this.props.reduceNumTickets(event);
     }
 
-    checkoutComplete = ()=>{
-        let checkoutData = store.getState()
-        console.log("checkout Data")
-        console.log(checkoutData)
-        this.props.checkoutComplete();
+    checkoutComplete = async () => {
 
-        // TODO: ADD Server call or alert here
-        this.setState({
-            checkoutComplete: true
-        });
+        let checkoutData = store.getState()
+        console.log("checkout Data before ")
+
+        console.log(checkoutData)
+        let orderData;
+        if (checkoutData.events !== null && checkoutData.events.length > 0) {
+            orderData = checkoutData.events.map((event => {
+                return {
+                    quantity: event.numTickets,
+                    price: event.ticketPrice,
+                    purchased: true,
+                    eventId: event.id
+                }
+            }));
+
+            let formData = {
+                orderItemList : orderData,
+                totalCost : checkoutData.total
+            }
+
+            CheckoutService.checkout(formData)
+                .then(response => {
+                    console.log("data received :" + response);
+                    this.props.checkoutComplete();
+                    alert("Purchase Complete")
+                    window.location = "/";
+                })
+                .error(err => {
+                    alert("Purchase Failed ")
+                    window.location = "/";
+                })
+        }
+
+
 
     }
 
@@ -41,12 +66,17 @@ class Cart extends Component{
     }
 
 
+
+
+
+
     render(){
         console.log(" Cart Render !!!")
-        if (this.state.checkoutComplete === true ) {
-            return <Redirect to='/' />
+        const token = localStorage.getItem("idToken");
+        if (!token) {
+            return (<div> Please login to use Cart Functionality !!!!!</div>);
         }
-        let addedItems = this.props.events != null && this.props.events.length > 0 ?
+        let addedItems = this.props.events != null && this.props.events.length ?
             (
                 this.props.events.map(event=>{
                     return(
@@ -64,6 +94,7 @@ class Cart extends Component{
                                     <MaterialIcon icon="add_circle" size='large' onClick={()=>{this.addNumTickets(event)}} />
                                     <MaterialIcon icon="remove_circle" size='large' onClick={()=>{this.reduceNumTickets(event)}} />
                                 </div>
+                                {/*<button className="waves-effect waves-light btn pink remove" onClick={()=>{this.handleRemove(event.id)}}>Remove</button>*/}
                             </div>
 
                         </li>
@@ -71,7 +102,7 @@ class Cart extends Component{
 
                     )
                 })
-            ) : (<h2 className="collection-item avatar" > Cart Empty !!!!</h2>)
+            ) : (<h2 className="collection-item avatar" >Cart Empty !!!!</h2>)
         return(
             <div className="container">
                 <div className="cart">

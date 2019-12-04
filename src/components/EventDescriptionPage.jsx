@@ -66,7 +66,8 @@ class EventDescriptionPage extends Component {
       this.props.addToCart(event)
       Close()
     }
-    let Close = () => {
+
+          let Close = () => {
       if (this.state.token != null) {
         this.createOrder();
         this.setState({ open: false });
