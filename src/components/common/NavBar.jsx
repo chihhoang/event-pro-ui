@@ -12,7 +12,7 @@ const NavBar = ({ user }) => {
             Shopping Cart
         </Link>
         <Link className="navbar-brand" to="/history">
-            Purchase History
+            Booking History
         </Link>
 
       <div

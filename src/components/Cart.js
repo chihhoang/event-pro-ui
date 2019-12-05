@@ -31,7 +31,7 @@ class Cart extends Component{
         let orderData;
         if (checkoutData.events !== null && checkoutData.events.length > 0) {
             orderData = checkoutData.events.map((event => {
-                return {
+                    return {
                     quantity: event.numTickets,
                     price: event.ticketPrice,
                     purchased: true,
@@ -48,11 +48,11 @@ class Cart extends Component{
                 .then(response => {
                     console.log("data received :" + response);
                     this.props.checkoutComplete();
-                    alert("Purchase Complete")
+                    alert("Booking Complete. Please show your booking reference number and pay at the counter to collect your ticket. Kindly refer to the Booking Reference number in the booking history " )
                     window.location = "/";
                 })
                 .error(err => {
-                    alert("Purchase Failed ")
+                    alert("Booking Failed ")
                     window.location = "/";
                 })
         }
