@@ -18,13 +18,16 @@ export default class ListEvents extends Component {
       this.setState({ EventData: res.data });
     });
   }
-  redirectTo(name, description) {
+  redirectTo(name, description,location) {
     window.open(
       "http://twitter.com/share?url=https://www.eventpro.chihoang.pro/&text=Event Name: " +
         name +
         "%0A" +
         "Event Description: " +
         description +
+        "%0A" +
+        "Event Location" +
+        location +
         "%0A" +
         "Book tickets for this Event:" +
         "  "
@@ -78,7 +81,8 @@ export default class ListEvents extends Component {
                       onClick={() =>
                         this.redirectTo(
                           EventData.eventName,
-                          EventData.description
+                          EventData.description,
+                          EventData.location
                         )
                       }
                       target="_blank"
