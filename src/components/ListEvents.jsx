@@ -46,6 +46,7 @@ export default class ListEvents extends Component {
                  <th>Event EndDate</th>
                 <th>Event Name</th>
                 <th>Event Location</th>
+                <th>Share</th>
               </tr>
             </thead>
             <tbody>
