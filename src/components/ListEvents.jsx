@@ -27,9 +27,10 @@ export default class ListEvents extends Component {
           <h2>List Of Events</h2>
           <br />
           <Table striped bordered hover size="xl">
-            <thead>
+            <thead class="table-success">
               <tr>
-                <th>Event StartDate-EndDate</th>
+                <th>Event StartDate</th>
+                 <th>Event EndDate</th>
                 <th>Event Name</th>
                 <th>Event Location</th>
               </tr>
@@ -38,10 +39,12 @@ export default class ListEvents extends Component {
               {this.state.EventData.map(EventData => (
                 <tr key={EventData.id}>
                   <td>
-                    {new Date(EventData.startTime).toLocaleString("en-US")} -
-                    {new Date(EventData.endTime).toLocaleString("en-US")}
+                    {new Date(EventData.startTime).toLocaleString("en-US")} 
                   </td>
                   <td>
+                    {new Date(EventData.endTime).toLocaleString("en-US")}
+                  </td>
+                  <td
                     <EventDescriptionPage
                       name={EventData.eventName}
                       imageUrl={EventData.imageUrl}
