@@ -86,6 +86,7 @@ export default class ListEvents extends Component {
                     >
                       Tweet
                     </a>
+                    </td>
                 </tr>
               ))}
             </tbody>
