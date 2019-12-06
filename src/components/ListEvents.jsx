@@ -52,7 +52,7 @@ export default class ListEvents extends Component {
                       eventRecord={EventData}
                     />
                   </td>
-                  <td>SJSU Event Center</td>
+                  <td>{EventData.location}</td>
                 </tr>
               ))}
             </tbody>
