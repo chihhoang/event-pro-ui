@@ -19,7 +19,6 @@ export default class ListEvents extends Component {
     });
   }
   redirectTo(name, description) {
-    alert(name);
     window.open(
       "http://twitter.com/share?url=https://www.eventpro.chihoang.pro/&text=Event Name: " +
         name +
