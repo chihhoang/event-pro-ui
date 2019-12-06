@@ -18,6 +18,19 @@ export default class ListEvents extends Component {
       this.setState({ EventData: res.data });
     });
   }
+  redirectTo(name, description) {
+    alert(name);
+    window.open(
+      "http://twitter.com/share?url=https://www.eventpro.chihoang.pro/&text=Event Name: " +
+        name +
+        "%0A" +
+        "Event Description: " +
+        description +
+        "%0A" +
+        "Book tickets for this Event:" +
+        "  "
+    );
+  }
 
   render() {
     return (
@@ -58,6 +71,20 @@ export default class ListEvents extends Component {
                       height="70" alt="image" />
                   </td>
                   <td>{EventData.location}</td>
+                  <td>
+                    <a
+                      class="fa fa-twitter"
+                      style={{ color: "#0000FF" }}
+                      onClick={() =>
+                        this.redirectTo(
+                          EventData.eventName,
+                          EventData.description
+                        )
+                      }
+                      target="_blank"
+                    >
+                      Tweet
+                    </a>
                 </tr>
               ))}
             </tbody>
