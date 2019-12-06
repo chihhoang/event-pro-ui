@@ -44,8 +44,8 @@ export default class ListEvents extends Component {
           <Table striped bordered hover size="xl">
             <thead class="table-success">
               <tr>
-                <th>Event StartDate</th>
-                 <th>Event EndDate</th>
+                <th>Event Start Date</th>
+                 <th>Event End Date</th>
                 <th>Event Name</th>
                 <th>Event Location</th>
                 <th>Share</th>
