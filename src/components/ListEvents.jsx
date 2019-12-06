@@ -55,7 +55,7 @@ export default class ListEvents extends Component {
                       eventRecord={EventData}
                     />
                     <img src={EventData.imageUrl} width="120"
-                      height="70"/>
+                      height="70" alt="image" />
                   </td>
                   <td>{EventData.location}</td>
                 </tr>
