@@ -51,13 +51,8 @@ export default class ListEvents extends Component {
                       eventId={EventData.id}
                       eventRecord={EventData}
                     />
-                    <a href={EventData.imageUrl}>
-                    <img
-                      src={event.imageUrl}
-                      width="120"
-                      height="70"
-                      alt="event"
-                    />
+                    <img src={this.props.imageUrl} width="120"
+                      height="70"/>
                   </td>
                   <td>{EventData.location}</td>
                 </tr>
