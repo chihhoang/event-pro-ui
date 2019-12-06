@@ -44,7 +44,7 @@ export default class ListEvents extends Component {
                   <td>
                     {new Date(EventData.endTime).toLocaleString("en-US")}
                   </td>
-                  <td
+                  <td>
                     <EventDescriptionPage
                       name={EventData.eventName}
                       imageUrl={EventData.imageUrl}
