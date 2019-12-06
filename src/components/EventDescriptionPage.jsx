@@ -98,16 +98,16 @@ class EventDescriptionPage extends Component {
                 <h5>Description:</h5>
                 {this.props.description}
                 <br />
-                <h5>ticketsAvailable:</h5>
+                <h5>Tickets Available:</h5>
                 {this.props.ticketsAvailable}
                 <br />
-                <h5>ticketPrice:</h5>
+                <h5>Ticket Price:</h5>
                 {"$" + this.props.ticketPrice}
               </Col>
             </Row>
           </Modal.Body>
           <Modal.Footer>
-            <h3>NumberOfTickets</h3>
+            <h3>Number of Tickets</h3>
             <input
               type="text"
               name="numberOfTickets"
