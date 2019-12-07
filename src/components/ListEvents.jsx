@@ -18,6 +18,21 @@ export default class ListEvents extends Component {
       this.setState({ EventData: res.data });
     });
   }
+  redirectTo(name, description,location) {
+    window.open(
+      "http://twitter.com/share?url=https://www.eventpro.chihoang.pro/&text=Event Name: " +
+        name +
+        "%0A" +
+        "Event Description: " +
+        description +
+        "%0A" +
+        "Event Location" +
+        location +
+        "%0A" +
+        "Book tickets for this Event:" +
+        "  "
+    );
+  }
 
   render() {
     return (
@@ -27,18 +42,22 @@ export default class ListEvents extends Component {
           <h2>List Of Events</h2>
           <br />
           <Table striped bordered hover size="xl">
-            <thead>
+            <thead class="table-success">
               <tr>
-                <th>Event StartDate-EndDate</th>
+                <th>Event Start Date</th>
+                 <th>Event End Date</th>
                 <th>Event Name</th>
                 <th>Event Location</th>
+                <th>Share</th>
               </tr>
             </thead>
             <tbody>
               {this.state.EventData.map(EventData => (
                 <tr key={EventData.id}>
                   <td>
-                    {new Date(EventData.startTime).toLocaleString("en-US")} -
+                    {new Date(EventData.startTime).toLocaleString("en-US")} 
+                  </td>
+                  <td>
                     {new Date(EventData.endTime).toLocaleString("en-US")}
                   </td>
                   <td>
@@ -51,15 +70,26 @@ export default class ListEvents extends Component {
                       eventId={EventData.id}
                       eventRecord={EventData}
                     />
-                    <a href={EventData.imageUrl}>
-                    <img
-                      src={event.imageUrl}
-                      width="120"
-                      height="70"
-                      alt="event"
-                    />
+                    <img src={EventData.imageUrl} width="120"
+                      height="70" alt="image" />
                   </td>
                   <td>{EventData.location}</td>
+                  <td>
+                    <a
+                      class="fa fa-twitter"
+                      style={{ color: "#0000FF" }}
+                      onClick={() =>
+                        this.redirectTo(
+                          EventData.eventName,
+                          EventData.description,
+                          EventData.location
+                        )
+                      }
+                      target="_blank"
+                    >
+                      Tweet
+                    </a>
+                    </td>
                 </tr>
               ))}
             </tbody>
